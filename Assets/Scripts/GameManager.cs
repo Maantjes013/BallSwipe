@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Ball ballPrefab;
     public Text scoreField;
     public Text windField;
+    public Text tutorialText;
     public CinemachineVirtualCamera ballCamera;
     public WindManager windManager;
     public GameObject explosionEffect;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SpawnBall();
+        StartCoroutine(RemoveTutorial());
     }
 
     private void Update()
@@ -35,6 +37,12 @@ public class GameManager : MonoBehaviour
             Destroy(instantiatedBall.gameObject);
             SpawnBall();
         }
+    }
+
+    private IEnumerator RemoveTutorial()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(tutorialText.gameObject);
     }
 
     private void SpawnBall()
