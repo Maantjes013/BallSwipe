@@ -52,7 +52,8 @@ public class Ball : MonoBehaviour
             swipeDelta.y = 0;
 
         // Determine force and apply to ball
-        Vector3 force = new Vector3(-swipeDelta.x * forwardSpeedMultiplier, -swipeDelta.y * upwardsSpeedMultiplier, -swipeDelta.y * forwardSpeedMultiplier) * forceMultiplier;
+        Vector3 force = new Vector3(-swipeDelta.x * forwardSpeedMultiplier, -swipeDelta.y * upwardsSpeedMultiplier, 
+            -swipeDelta.y * forwardSpeedMultiplier) * forceMultiplier;
         rb.AddForce(force, ForceMode.Impulse);
 
         isHoldingMouse = false;
@@ -64,12 +65,12 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Goal"))
-            FindObjectOfType<GameManager>().AddPoints();
+            GameManager.Instance.AddPoints();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Backwall"))
-            FindObjectOfType<GameManager>().ExplodeBall();
+            GameManager.Instance.ExplodeBall();
     }
 }

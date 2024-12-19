@@ -1,12 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-using UnityEngine.VFX;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     public Transform spawnPoint;
     public Ball ballPrefab;
@@ -18,7 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject explosionEffect;
 
     private Ball instantiatedBall;
-    private GameObject instantiatedExplosionEffect;
 
     private float points = 0;
 
@@ -49,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         instantiatedBall = Instantiate(ballPrefab, spawnPoint);
         AdjustCamera(instantiatedBall);
+
         windManager.DetermineWindForce(instantiatedBall);
         UpdateWindUI();
     }

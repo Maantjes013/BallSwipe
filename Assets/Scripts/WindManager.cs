@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,15 +22,6 @@ public class WindManager : MonoBehaviour
         return windForce;
     }
 
-    private void ApplyWindToBall()
-    {
-        if (activeBall.rb != null && activeBall.isFlying)
-        {
-            // Apply wind force to the ball
-            activeBall.rb.AddForce(windDirection * windForce);
-        }
-    }
-
     public void DetermineWindForce(Ball instantiatedBall)
     {
         //Get random wind force and round by 2 decimals
@@ -45,5 +34,14 @@ public class WindManager : MonoBehaviour
             windImage.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 
         activeBall = instantiatedBall;
+    }
+
+    private void ApplyWindToBall()
+    {
+        if (activeBall.rb != null && activeBall.isFlying)
+        {
+            // Apply wind force to the active ball
+            activeBall.rb.AddForce(windDirection * windForce);
+        }
     }
 }
